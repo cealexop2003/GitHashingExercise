@@ -1,0 +1,17 @@
+#!/bin/bash
+
+# Prompt user for a 4-digit integer
+echo "Please enter a 4-digit integer:"
+read input_integer
+
+# Check if the input is a 4-digit integer
+if [[ ! "$input_integer" =~ ^[0-9]{4}$ ]]; then
+  echo "Invalid input. Please enter a valid 4-digit integer."
+  exit 1
+fi
+
+# Hash the input using SHA-256 and save it to hash_output.txt
+echo -n "$input_integer" | sha256sum | awk '{print $1}' > hash_output.txt
+
+# Notify user that the hash has been saved
+echo "The hash of $input_integer has been saved to hash_output.txt."
